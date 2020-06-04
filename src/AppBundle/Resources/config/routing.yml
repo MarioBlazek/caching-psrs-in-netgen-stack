@@ -1,0 +1,4 @@
+current:
+    path:     /weather/current/{city}
+    defaults: { _controller: app.weather.controller:current }
+    methods: [GET]

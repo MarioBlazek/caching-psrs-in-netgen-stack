@@ -24,6 +24,7 @@
     },
     "require": {
         "php": "^7.2",
+        "ext-json": "*",
         "doctrine/doctrine-bundle": "^1.9.1",
         "doctrine/orm": "^2.6.3",
         "ezsystems/doctrine-dbal-schema": "^0.1.2",

@@ -1,0 +1,22 @@
+parameters:
+
+services:
+    app.weather.config_resolver:
+        class: AppBundle\Weather\OpenWeatherMapConfigResolver
+        public: false
+        arguments:
+            - '@ezpublish.config.resolver'
+
+    app.weather.client:
+        class: AppBundle\Weather\OpenWeatherMapClient
+        arguments:
+            - '@app.weather.config_resolver'
+            - '@httplug.client.default'
+            - '@httplug.message_factory'
+
+    app.weather.controller:
+        class: AppBundle\Controller\WeatherController
+        public: true
+        arguments:
+            - '@twig'
+            - '@app.weather.client'

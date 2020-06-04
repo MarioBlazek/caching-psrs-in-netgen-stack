@@ -1,0 +1,56 @@
+{% extends nglayouts.layoutTemplate %}
+
+{% block content %}
+    <article class="view-type view-type-full ng-article vf1">
+        <header class="full-page-header full-article-header">
+            <div class="container">
+                <div class="full-page-main-tag">
+                    {{ weather.sys.country }}
+                </div>
+                <h1 class="full-page-title">Weather for {{ weather.name }}</h1>
+                <div class="full-page-info">
+                    Longitude: {{ weather.coord.lon }}
+                    Latitude: {{ weather.coord.lat }}
+                </div>
+            </div>
+        </header>
+
+        <div class="container">
+            <div class="full-article-image">
+            </div>
+
+            <div class="full-article-content">
+                <div class="full-article-body">
+                <h4>Weather</h4>
+                    {% for info in weather.weather %}
+                        Main: {{ info.main }}<br>
+                        Description: {{ info.description }}<br>
+                    {% endfor %}
+                <hr>
+
+                <h4>Temperature</h4>
+                    Temperature: {{ weather.main.temp }}<br>
+                    Feels like: {{ weather.main.feels_like }}<br>
+                    Min temperature: {{ weather.main.temp_min }}<br>
+                    Max temperature: {{ weather.main.temp_max }}<br>
+                <hr>
+
+                <h4>Wind</h4>
+                    Wind speed: {{ weather.wind.speed }}<br>
+                    Wind direction: {{ weather.wind.deg }}<br>
+                <hr>
+
+                <h4>Info</h4>
+                    Sunrise: {{ weather.sys.sunrise }}<br>
+                    Sunset: {{ weather.sys.sunset }}<br>
+                <hr>
+
+                    <div class="full-article-tags">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+{% endblock %}
+

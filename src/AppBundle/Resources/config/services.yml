@@ -1,3 +1,6 @@
+imports:
+    - { resource: weather.yml }
+
 parameters:
 
 services:
