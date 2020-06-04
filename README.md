@@ -2,16 +2,36 @@
 
 ## Description
 
+### Redis
+
+1. Include `cache.redis.yml` configuration from `cache_pool`
+2. Replace `cache.app` with `cache.redis` in your service arguments
+3. Start local Redis server with:
+
+```bash
+redis-server /usr/local/etc/redis.conf
+```
+
+4. Test
+
+#### Redis commands
+
+Use `redis-cli` to enter the Redis server through command line.
+
+Once you are inside the Redis you can use this commands: 
+
+* `keys *` - to list all the available keys
+* `ttl key` - to display the time required for key to expire
+* `expire key 0` - explicitly expire the key
+* `del key` - delete the key from Redis
+
 ## Install guide
 
-
-Clone this repo
-composer install
-php bin/console doctrine:database:create
-php bin/console ezplatform:install netgen-media
-
-yarn install
-yarn build:dev
-
-
-symfony serve
+To install this example do the following:
+* clone this repository
+* run `composer install`
+* create database `php bin/console doctrine:database:create`
+* install demo content `php bin/console ezplatform:install netgen-media`
+* install frontend dependecies `yarn install`
+* build dev assets `yarn build:dev`
+* run `symfony serve` to start Symfony server

@@ -53,7 +53,7 @@ class Psr6DecoratedOpenWeatherMapClient extends OpenWeatherMapClient
         }
 
         $item->set($weather);
-        $item->expiresAfter(10);
+        $item->expiresAfter($this->ttl);
 
         $this->adapter->save($item);
 

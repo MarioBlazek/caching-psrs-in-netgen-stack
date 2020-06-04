@@ -18,4 +18,4 @@ parameters:
 
     app.default.weather.base_url: 'api.openweathermap.org/data/2.5/weather'
     app.default.weather.appid: 'd94fb9615f049314b63b84482d6ea8fd'
-    app.default.weather.ttl: 10
+    app.default.weather.ttl: 1200
