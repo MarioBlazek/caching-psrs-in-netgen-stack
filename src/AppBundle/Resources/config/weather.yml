@@ -20,3 +20,13 @@ services:
         arguments:
             - '@twig'
             - '@app.weather.client'
+
+    app.weather.psr6_client:
+        class: AppBundle\Weather\Psr6DecoratedOpenWeatherMapClient
+        decorates: app.weather.client
+        decoration_inner_name: app.weather.client.inner
+        public: false
+        arguments:
+            - '@app.weather.client.inner'
+            - '@cache.app'
+            - '@ezpublish.config.resolver'

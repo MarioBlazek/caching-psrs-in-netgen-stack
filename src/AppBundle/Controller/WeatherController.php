@@ -3,19 +3,19 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Weather\OpenWeatherMapClient;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
+use AppBundle\Weather\Cities;
 use Twig\Environment;
 
 class WeatherController
 {
     /**
-     * @var Environment
+     * @var \Twig\Environment
      */
     private $twig;
 
     /**
-     * @var OpenWeatherMapClient
+     * @var \AppBundle\Weather\OpenWeatherMapClient
      */
     private $openWeatherMapClient;
 
@@ -27,13 +27,25 @@ class WeatherController
 
     public function current(string $city): Response
     {
+        $city = strtolower(trim($city));
+
+        $response = new Response();
+
+        if (!$this->isValid($city)) {
+            return $response->setStatusCode(Response::HTTP_BAD_REQUEST);
+        }
+
         $weather = $this->openWeatherMapClient->getCurrentWeather($city);
 
         $renderedContent = $this->twig->render('@ezdesign/weather/current.html.twig', ['weather' => $weather]);
 
-        $response = new Response();
         $response->setContent($renderedContent);
 
         return $response;
+    }
+
+    private function isValid(string $city): bool
+    {
+        return in_array($city, Cities::getCities());
     }
 }
