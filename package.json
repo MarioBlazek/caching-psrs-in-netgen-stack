@@ -1,0 +1,63 @@
+{
+    "browserslist": {
+        "defaults": [
+            "last 2 versions",
+            "Safari >= 10",
+            "iOS >= 10",
+            "not ie <= 10",
+            "> 1%"
+        ],
+        "evergreen": [
+            "last 2 Chrome versions",
+            "last 2 ChromeAndroid versions",
+            "last 2 Firefox versions",
+            "last 2 FirefoxAndroid versions",
+            "last 2 Safari versions",
+            "last 2 iOS versions",
+            "last 2 Edge versions",
+            "last 2 Opera versions"
+        ]
+    },
+    "scripts": {
+        "dev": "encore dev",
+        "build:dev": "encore dev",
+        "prod": "encore production",
+        "build:prod": "encore production",
+        "watch": "encore dev --watch",
+        "start": "encore dev-server",
+        "server": "encore dev-server",
+        "site:dev": "encore dev --config-name",
+        "site:prod": "encore production --config-name",
+        "site:watch": "encore dev --watch --config-name",
+        "site:server": "encore dev-server --config-name",
+        "ezplatform": "encore production --config=webpack.config.ezplatform.js"
+    },
+    "private": true,
+    "devDependencies": {
+        "@babel/core": "^7.4.3",
+        "@babel/preset-env": "^7.4.3",
+        "@babel/preset-react": "^7.0.0",
+        "@symfony/webpack-encore": "^0.28.0",
+        "autoprefixer": "^9.5.1",
+        "eslint": "^5.16.0",
+        "eslint-config-airbnb": "^17.1.0",
+        "eslint-plugin-import": "^2.17.2",
+        "eslint-plugin-jsx-a11y": "^6.2.1",
+        "eslint-plugin-react": "^7.12.4",
+        "node-sass": "^4.11.0",
+        "path": "^0.12.7",
+        "postcss-loader": "^3.0.0",
+        "sass-lint": "^1.12.1",
+        "sass-loader": "^7.1.0"
+    },
+    "dependencies": {
+        "@babel/polyfill": "^7.4.3",
+        "@fortawesome/fontawesome-free": "^5.8.1",
+        "@netgen/javascript-cookie-control": "^0.0.6",
+        "bootstrap": "^4.3.1",
+        "jquery": "^3.4.0",
+        "magnific-popup": "^1.1.0",
+        "popper.js": "^1.15.0",
+        "swiper": "^4.5.0"
+    }
+}

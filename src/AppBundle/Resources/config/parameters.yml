@@ -1,0 +1,17 @@
+parameters:
+    ngsite.default.search.content_types:
+        - ng_blog_post
+        - ng_article
+        - ng_news
+        - ng_category
+        - ng_feedback_form
+        - ng_landing_page
+        - ng_video
+        - ng_audio
+        - file
+
+    netgen_admin_ui.default.legacy_routes: [ez_urlalias, ngsite_content_search]
+
+    ngsite.default.lazy_loading.enabled: true
+    ngsite.default.lazy_loading.initial_image_alias: 'i30'
+    ngsite.default.render_content_directly: true
