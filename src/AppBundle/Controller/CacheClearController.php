@@ -50,7 +50,15 @@ class CacheClearController
 
     public function clearCacheByWeatherTag(): Response
     {
-        $this->pool->invalidateTags([CacheKeyRegistry::OPEN_WEATHER_MAP_TAG]);
+        $response = new Response();
+
+        try {
+            $this->pool->invalidateTags([CacheKeyRegistry::OPEN_WEATHER_MAP_TAG]);
+        } catch (InvalidArgumentException $exception) {
+            return $response->setStatusCode(Response::HTTP_NOT_FOUND);
+        }
+
+        return $response;
     }
 
     private function isValid(string $city): bool

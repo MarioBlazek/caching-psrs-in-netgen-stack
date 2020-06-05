@@ -8,6 +8,6 @@ final class CacheKeyRegistry
 
     public function getCurrentWeatherKey(string $city): string
     {
-        return 'openweather_map_city_' . md5($city);
+        return 'openweather_map_city_' . $city;
     }
 }
