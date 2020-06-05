@@ -30,3 +30,5 @@ parameters:
 
     ngsite.default.site_domain: localhost
     ngsite.default.locations.site_info.id: 65
+
+    app.default.weather.appid: 'your_token_here'
