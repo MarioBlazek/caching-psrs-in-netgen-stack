@@ -21,6 +21,16 @@ services:
             - '@twig'
             - '@app.weather.client'
 
+    app.weather.cache_controller:
+        class: AppBundle\Controller\CacheClearController
+        public: true
+        arguments:
+            - '@cache.app'
+            - '@app.weather.key_registry'
+
+    app.weather.key_registry:
+        class: AppBundle\Weather\CacheKeyRegistry
+
     app.weather.psr6_client:
         class: AppBundle\Weather\Psr6DecoratedOpenWeatherMapClient
         decorates: app.weather.client
@@ -30,3 +40,4 @@ services:
             - '@app.weather.client.inner'
             - '@cache.app'
             - '@ezpublish.config.resolver'
+            - '@app.weather.key_registry'

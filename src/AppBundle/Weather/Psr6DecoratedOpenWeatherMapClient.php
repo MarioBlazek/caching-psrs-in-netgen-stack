@@ -3,7 +3,7 @@
 namespace AppBundle\Weather;
 
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
-use Symfony\Component\Cache\Adapter\AdapterInterface;
+use Psr\Cache\CacheItemPoolInterface;
 
 class Psr6DecoratedOpenWeatherMapClient extends OpenWeatherMapClient
 {
@@ -13,10 +13,10 @@ class Psr6DecoratedOpenWeatherMapClient extends OpenWeatherMapClient
     private $client;
 
     /**
-     * @var \Symfony\Component\Cache\Adapter\AdapterInterface
+     * @var \Psr\Cache\CacheItemPoolInterface
      *
      */
-    private $adapter;
+    private $pool;
 
     /**
      * @var \eZ\Publish\Core\MVC\ConfigResolverInterface
@@ -28,19 +28,30 @@ class Psr6DecoratedOpenWeatherMapClient extends OpenWeatherMapClient
      */
     private $ttl;
 
-    public function __construct(OpenWeatherMapClient $client, AdapterInterface $adapter, ConfigResolverInterface $configResolver)
+    /**
+     * @var \AppBundle\Weather\CacheKeyRegistry
+     */
+    private $keyRegistry;
+
+    public function __construct(
+        OpenWeatherMapClient $client,
+        CacheItemPoolInterface $pool,
+        ConfigResolverInterface $configResolver,
+        CacheKeyRegistry $keyRegistry
+    )
     {
         $this->client = $client;
-        $this->adapter = $adapter;
+        $this->pool = $pool;
         $this->configResolver = $configResolver;
         $this->ttl = $this->configResolver->getParameter('weather.ttl', 'app');
+        $this->keyRegistry = $keyRegistry;
     }
 
     public function getCurrentWeather(string $city): array
     {
-        $key = $this->getKey($city);
+        $key = $this->keyRegistry->getCurrentWeatherKey($city);
 
-        $item = $this->adapter->getItem($key);
+        $item = $this->pool->getItem($key);
 
         if ($item->isHit()) {
             return $item->get();
@@ -54,14 +65,10 @@ class Psr6DecoratedOpenWeatherMapClient extends OpenWeatherMapClient
 
         $item->set($weather);
         $item->expiresAfter($this->ttl);
+        $item->tag(CacheKeyRegistry::OPEN_WEATHER_MAP_TAG);
 
-        $this->adapter->save($item);
+        $this->pool->save($item);
 
         return $weather;
-    }
-
-    private function getKey(string $city): string
-    {
-        return 'openweather_map_city_' . md5($city);
     }
 }

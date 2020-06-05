@@ -4,3 +4,15 @@ current:
     methods: [GET]
     requirements:
         city: '\w+'
+
+clear_cache_by_city:
+    path:     /weather/cache/{city}
+    defaults: { _controller: app.weather.cache_controller:clearCacheByCity }
+    methods: [GET]
+    requirements:
+        city: '\w+'
+
+clear_cache_by_tag:
+    path:     /weather/cache-tags
+    defaults: { _controller: app.weather.cache_controller:clearCacheByWeatherTag }
+    methods: [GET]

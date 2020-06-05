@@ -23,26 +23,26 @@
                 <div class="full-article-body">
                 <h4>Weather</h4>
                     {% for info in weather.weather %}
-                        Main: {{ info.main }}<br>
-                        Description: {{ info.description }}<br>
+                        Main: {{ info.main|default('none') }}<br>
+                        Description: {{ info.description|default('none') }}<br>
                     {% endfor %}
                 <hr>
 
                 <h4>Temperature</h4>
-                    Temperature: {{ weather.main.temp }}<br>
-                    Feels like: {{ weather.main.feels_like }}<br>
-                    Min temperature: {{ weather.main.temp_min }}<br>
-                    Max temperature: {{ weather.main.temp_max }}<br>
+                    Temperature: {{ weather.main.temp|default('none') }}<br>
+                    Feels like: {{ weather.main.feels_like|default('none') }}<br>
+                    Min temperature: {{ weather.main.temp_min|default('none') }}<br>
+                    Max temperature: {{ weather.main.temp_max|default('none') }}<br>
                 <hr>
 
                 <h4>Wind</h4>
-                    Wind speed: {{ weather.wind.speed }}<br>
-                    Wind direction: {{ weather.wind.deg }}<br>
+                    Wind speed: {{ weather.wind.speed|default('none') }}<br>
+                    Wind direction: {{ weather.wind.deg|default('none') }}<br>
                 <hr>
 
                 <h4>Info</h4>
-                    Sunrise: {{ weather.sys.sunrise }}<br>
-                    Sunset: {{ weather.sys.sunset }}<br>
+                    Sunrise: {{ weather.sys.sunrise|default('none') }}<br>
+                    Sunset: {{ weather.sys.sunset|default('none') }}<br>
                 <hr>
 
                     <div class="full-article-tags">
