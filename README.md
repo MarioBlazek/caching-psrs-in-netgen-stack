@@ -47,3 +47,7 @@ To install this example do the following:
 * install frontend dependecies `yarn install`
 * build dev assets `yarn build:dev`
 * run `symfony serve` to start Symfony server
+
+## Presentation
+
+Presentation is available in PDF format and can be accessed [here](PSR-6_and_PRS-16_caching.pdf).
