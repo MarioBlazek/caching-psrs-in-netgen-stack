@@ -22,6 +22,7 @@ class WeatherController
     public function __construct(Environment $twig, OpenWeatherMapClient $openWeatherMapClient)
     {
         $this->twig = $twig;
+        $twig->getExtension(\Twig\Extension\CoreExtension::class)->setTimezone('Europe/Zagreb');
         $this->openWeatherMapClient = $openWeatherMapClient;
     }
 

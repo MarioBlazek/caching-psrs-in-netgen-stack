@@ -13,10 +13,12 @@ class OpenWeatherMapClient
      * @var \AppBundle\Weather\OpenWeatherMapConfigResolver
      */
     private $configResolver;
+
     /**
      * @var \Http\Client\HttpClient
      */
     private $client;
+
     /**
      * @var \Http\Message\MessageFactory
      */

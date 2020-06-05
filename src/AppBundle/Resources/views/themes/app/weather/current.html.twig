@@ -41,8 +41,8 @@
                 <hr>
 
                 <h4>Info</h4>
-                    Sunrise: {{ weather.sys.sunrise|default('none') }}<br>
-                    Sunset: {{ weather.sys.sunset|default('none') }}<br>
+                    Sunrise: {{ weather.sys.sunrise|date("H:i:s") }}<br>
+                    Sunset: {{ weather.sys.sunset|date("H:i:s") }}<br>
                 <hr>
 
                     <div class="full-article-tags">

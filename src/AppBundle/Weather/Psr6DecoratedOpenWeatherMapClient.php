@@ -65,7 +65,7 @@ class Psr6DecoratedOpenWeatherMapClient extends OpenWeatherMapClient
 
         $item->set($weather);
         $item->expiresAfter($this->ttl);
-        $item->tag(CacheKeyRegistry::OPEN_WEATHER_MAP_TAG);
+//        $item->tag(CacheKeyRegistry::OPEN_WEATHER_MAP_TAG);
 
         $this->pool->save($item);
 
