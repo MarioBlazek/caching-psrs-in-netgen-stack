@@ -41,3 +41,14 @@ services:
 #            - '@cache.app'
 #            - '@ezpublish.config.resolver'
 #            - '@app.weather.key_registry'
+
+#    app.weather.psr16_client:
+#        class: AppBundle\Weather\Psr16DecoratedOpenWeatherMapClient
+#        decorates: app.weather.client
+#        decoration_inner_name: app.weather.client.inner
+#        public: false
+#        arguments:
+#            - '@app.weather.client.inner'
+#            - '@cache.app'
+#            - '@ezpublish.config.resolver'
+#            - '@app.weather.key_registry'
