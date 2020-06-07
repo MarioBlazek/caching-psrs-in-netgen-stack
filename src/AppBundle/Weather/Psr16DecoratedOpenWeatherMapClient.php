@@ -1,10 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace AppBundle\Weather;
 
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use Symfony\Component\Cache\Adapter\AdapterInterface;
-use Symfony\Component\Cache\Simple\FilesystemCache;
 use Symfony\Component\Cache\Simple\Psr6Cache;
 
 class Psr16DecoratedOpenWeatherMapClient extends OpenWeatherMapClient
@@ -16,7 +17,6 @@ class Psr16DecoratedOpenWeatherMapClient extends OpenWeatherMapClient
 
     /**
      * @var \Symfony\Component\Cache\Adapter\AdapterInterface
-     *
      */
     private $adapter;
 
@@ -45,8 +45,7 @@ class Psr16DecoratedOpenWeatherMapClient extends OpenWeatherMapClient
         AdapterInterface $adapter,
         ConfigResolverInterface $configResolver,
         CacheKeyRegistry $keyRegistry
-    )
-    {
+    ) {
         $this->client = $client;
         $this->adapter = $adapter;
         $this->configResolver = $configResolver;

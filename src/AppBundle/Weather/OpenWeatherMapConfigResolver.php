@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace AppBundle\Weather;
 
 use eZ\Publish\Core\MVC\ConfigResolverInterface;

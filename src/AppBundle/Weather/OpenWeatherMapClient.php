@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace AppBundle\Weather;
 
 use Http\Client\HttpClient;
@@ -28,8 +30,7 @@ class OpenWeatherMapClient
         OpenWeatherMapConfigResolver $configResolver,
         HttpClient $client,
         MessageFactory $messageFactory
-    )
-    {
+    ) {
         $this->configResolver = $configResolver;
         $this->client = $client;
         $this->messageFactory = $messageFactory;
@@ -55,6 +56,6 @@ class OpenWeatherMapClient
             return [];
         }
 
-        return json_decode((string)$response->getBody(), true);
+        return json_decode((string) $response->getBody(), true);
     }
 }

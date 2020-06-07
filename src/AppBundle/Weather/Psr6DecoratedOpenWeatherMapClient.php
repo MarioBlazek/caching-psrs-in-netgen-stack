@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace AppBundle\Weather;
 
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
@@ -14,7 +16,6 @@ class Psr6DecoratedOpenWeatherMapClient extends OpenWeatherMapClient
 
     /**
      * @var \Psr\Cache\CacheItemPoolInterface
-     *
      */
     private $pool;
 
@@ -38,8 +39,7 @@ class Psr6DecoratedOpenWeatherMapClient extends OpenWeatherMapClient
         CacheItemPoolInterface $pool,
         ConfigResolverInterface $configResolver,
         CacheKeyRegistry $keyRegistry
-    )
-    {
+    ) {
         $this->client = $client;
         $this->pool = $pool;
         $this->configResolver = $configResolver;
