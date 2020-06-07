@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace AppBundle\Controller;
 
 use AppBundle\Weather\Cities;
-use AppBundle\Weather\OpenWeatherMapClient;
+use AppBundle\Weather\OpenWeatherMapClientInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 
@@ -21,7 +21,7 @@ class WeatherController
      */
     private $openWeatherMapClient;
 
-    public function __construct(Environment $twig, OpenWeatherMapClient $openWeatherMapClient)
+    public function __construct(Environment $twig, OpenWeatherMapClientInterface $openWeatherMapClient)
     {
         $this->twig = $twig;
         $twig->getExtension(\Twig\Extension\CoreExtension::class)->setTimezone('Europe/Zagreb');

@@ -7,18 +7,14 @@ namespace AppBundle\Weather;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use Symfony\Component\Cache\Adapter\AdapterInterface;
 use Symfony\Component\Cache\Simple\Psr6Cache;
+use Psr\SimpleCache\CacheInterface;
 
-class Psr16DecoratedOpenWeatherMapClient extends OpenWeatherMapClient
+class Psr16DecoratedOpenWeatherMapClient implements OpenWeatherMapClientInterface
 {
     /**
-     * @var \AppBundle\Weather\OpenWeatherMapClient
+     * @var \AppBundle\Weather\OpenWeatherMapClientInterface
      */
     private $client;
-
-    /**
-     * @var \Symfony\Component\Cache\Adapter\AdapterInterface
-     */
-    private $adapter;
 
     /**
      * @var \eZ\Publish\Core\MVC\ConfigResolverInterface
@@ -31,7 +27,7 @@ class Psr16DecoratedOpenWeatherMapClient extends OpenWeatherMapClient
     private $ttl;
 
     /**
-     * @var \Symfony\Component\Cache\Simple\FilesystemCache;
+     * @var \Psr\SimpleCache\CacheInterface
      */
     private $cache;
 
@@ -47,7 +43,6 @@ class Psr16DecoratedOpenWeatherMapClient extends OpenWeatherMapClient
         CacheKeyRegistry $keyRegistry
     ) {
         $this->client = $client;
-        $this->adapter = $adapter;
         $this->configResolver = $configResolver;
         $this->ttl = $this->configResolver->getParameter('weather.ttl', 'app');
         $this->cache = new Psr6Cache($adapter);

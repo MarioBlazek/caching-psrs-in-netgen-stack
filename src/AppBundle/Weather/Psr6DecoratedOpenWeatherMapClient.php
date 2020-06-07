@@ -7,10 +7,10 @@ namespace AppBundle\Weather;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use Psr\Cache\CacheItemPoolInterface;
 
-class Psr6DecoratedOpenWeatherMapClient extends OpenWeatherMapClient
+class Psr6DecoratedOpenWeatherMapClient implements OpenWeatherMapClientInterface
 {
     /**
-     * @var \AppBundle\Weather\OpenWeatherMapClient
+     * @var \AppBundle\Weather\OpenWeatherMapClientInterface
      */
     private $client;
 
@@ -35,7 +35,7 @@ class Psr6DecoratedOpenWeatherMapClient extends OpenWeatherMapClient
     private $keyRegistry;
 
     public function __construct(
-        OpenWeatherMapClient $client,
+        OpenWeatherMapClientInterface $client,
         CacheItemPoolInterface $pool,
         ConfigResolverInterface $configResolver,
         CacheKeyRegistry $keyRegistry
@@ -65,7 +65,7 @@ class Psr6DecoratedOpenWeatherMapClient extends OpenWeatherMapClient
 
         $item->set($weather);
         $item->expiresAfter($this->ttl);
-//        $item->tag(CacheKeyRegistry::OPEN_WEATHER_MAP_TAG);
+        $item->tag(CacheKeyRegistry::OPEN_WEATHER_MAP_TAG);
 
         $this->pool->save($item);
 

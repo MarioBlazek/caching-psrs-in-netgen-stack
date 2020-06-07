@@ -9,7 +9,7 @@ use Http\Message\MessageFactory;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class OpenWeatherMapClient
+class OpenWeatherMapClient implements OpenWeatherMapClientInterface
 {
     /**
      * @var \AppBundle\Weather\OpenWeatherMapConfigResolver
