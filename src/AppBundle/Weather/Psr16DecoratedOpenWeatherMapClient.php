@@ -7,7 +7,6 @@ namespace AppBundle\Weather;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use Symfony\Component\Cache\Adapter\AdapterInterface;
 use Symfony\Component\Cache\Simple\Psr6Cache;
-use Psr\SimpleCache\CacheInterface;
 
 class Psr16DecoratedOpenWeatherMapClient implements OpenWeatherMapClientInterface
 {
