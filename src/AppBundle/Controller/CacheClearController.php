@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace AppBundle\Controller;
 
 use AppBundle\Weather\CacheKeyRegistry;
@@ -28,7 +30,7 @@ class CacheClearController
 
     public function clearCacheByCity(string $city): Response
     {
-        $city = strtolower(trim($city));
+        $city = mb_strtolower(trim($city));
 
         $response = new Response();
 
@@ -41,7 +43,6 @@ class CacheClearController
         try {
             $this->pool->deleteItem($city);
         } catch (InvalidArgumentException $e) {
-
             return $response->setStatusCode(Response::HTTP_NOT_FOUND);
         }
 
@@ -63,6 +64,6 @@ class CacheClearController
 
     private function isValid(string $city): bool
     {
-        return in_array($city, Cities::getCities());
+        return in_array($city, Cities::getCities(), true);
     }
 }

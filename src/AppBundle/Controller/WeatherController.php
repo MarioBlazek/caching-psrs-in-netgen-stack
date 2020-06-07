@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace AppBundle\Controller;
 
+use AppBundle\Weather\Cities;
 use AppBundle\Weather\OpenWeatherMapClient;
 use Symfony\Component\HttpFoundation\Response;
-use AppBundle\Weather\Cities;
 use Twig\Environment;
 
 class WeatherController
@@ -28,7 +30,7 @@ class WeatherController
 
     public function current(string $city): Response
     {
-        $city = strtolower(trim($city));
+        $city = mb_strtolower(trim($city));
 
         $response = new Response();
 
@@ -47,6 +49,6 @@ class WeatherController
 
     private function isValid(string $city): bool
     {
-        return in_array($city, Cities::getCities());
+        return in_array($city, Cities::getCities(), true);
     }
 }
