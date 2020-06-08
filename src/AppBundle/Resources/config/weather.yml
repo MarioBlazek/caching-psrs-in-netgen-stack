@@ -2,7 +2,7 @@ parameters:
 
 services:
     app.weather.config_resolver:
-        class: AppBundle\Weather\OpenWeatherMapConfigResolver
+        class: AppBundle\Weather\OpenWeatherMapUrlBuilder
         public: false
         arguments:
             - '@ezpublish.config.resolver'
