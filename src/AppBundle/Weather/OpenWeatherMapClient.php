@@ -9,12 +9,12 @@ use Http\Message\MessageFactory;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class OpenWeatherMapClient implements OpenWeatherMapClientInterface
+final class OpenWeatherMapClient implements OpenWeatherMapClientInterface
 {
     /**
-     * @var \AppBundle\Weather\OpenWeatherMapConfigResolver
+     * @var \AppBundle\Weather\OpenWeatherMapUrlBuilder
      */
-    private $configResolver;
+    private $urlBuilder;
 
     /**
      * @var \Http\Client\HttpClient
@@ -27,18 +27,18 @@ class OpenWeatherMapClient implements OpenWeatherMapClientInterface
     private $messageFactory;
 
     public function __construct(
-        OpenWeatherMapConfigResolver $configResolver,
+        OpenWeatherMapUrlBuilder $urlBuilder,
         HttpClient $client,
         MessageFactory $messageFactory
     ) {
-        $this->configResolver = $configResolver;
         $this->client = $client;
         $this->messageFactory = $messageFactory;
+        $this->urlBuilder = $urlBuilder;
     }
 
     public function getCurrentWeather(string $city): array
     {
-        $url = $this->configResolver->getUrl($city);
+        $url = $this->urlBuilder->getUrl($city);
 
         $request = $this->messageFactory
             ->createRequest(

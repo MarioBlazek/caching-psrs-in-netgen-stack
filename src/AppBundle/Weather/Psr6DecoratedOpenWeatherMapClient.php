@@ -7,7 +7,7 @@ namespace AppBundle\Weather;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use Psr\Cache\CacheItemPoolInterface;
 
-class Psr6DecoratedOpenWeatherMapClient implements OpenWeatherMapClientInterface
+final class Psr6DecoratedOpenWeatherMapClient implements OpenWeatherMapClientInterface
 {
     /**
      * @var \AppBundle\Weather\OpenWeatherMapClientInterface

@@ -8,7 +8,7 @@ use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use Symfony\Component\Cache\Adapter\AdapterInterface;
 use Symfony\Component\Cache\Simple\Psr6Cache;
 
-class Psr16DecoratedOpenWeatherMapClient implements OpenWeatherMapClientInterface
+final class Psr16DecoratedOpenWeatherMapClient implements OpenWeatherMapClientInterface
 {
     /**
      * @var \AppBundle\Weather\OpenWeatherMapClientInterface
@@ -52,11 +52,11 @@ class Psr16DecoratedOpenWeatherMapClient implements OpenWeatherMapClientInterfac
     {
         $key = $this->keyRegistry->getCurrentWeatherKey($city);
 
-        if (!$this->cache->has($key)) {
-            $weather = $this->client->getCurrentWeather($city);
-        } else {
-            $weather = $this->cache->get($key);
+        if ($this->cache->has($key)) {
+            return $this->cache->get($key);
         }
+
+        $weather = $this->client->getCurrentWeather($city);
 
         if (empty($weather)) {
             return [];

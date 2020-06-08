@@ -6,13 +6,8 @@ namespace AppBundle\Weather;
 
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 
-class OpenWeatherMapConfigResolver
+class OpenWeatherMapUrlBuilder
 {
-    /**
-     * @var \eZ\Publish\Core\MVC\ConfigResolverInterface
-     */
-    private $configResolver;
-
     /**
      * @var string
      */
@@ -25,9 +20,8 @@ class OpenWeatherMapConfigResolver
 
     public function __construct(ConfigResolverInterface $configResolver)
     {
-        $this->configResolver = $configResolver;
-        $this->baseUrl = $this->configResolver->getParameter('weather.base_url', 'app');
-        $this->appid = $this->configResolver->getParameter('weather.appid', 'app');
+        $this->baseUrl = $configResolver->getParameter('weather.base_url', 'app');
+        $this->appid = $configResolver->getParameter('weather.appid', 'app');
     }
 
     public function getUrl(string $city): string
