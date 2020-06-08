@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace AppBundle\Weather;
 
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
-use Symfony\Component\Cache\Adapter\AdapterInterface;
+use Psr\Cache\CacheItemPoolInterface;
 use Symfony\Component\Cache\Simple\Psr6Cache;
 
 final class Psr16DecoratedOpenWeatherMapClient implements OpenWeatherMapClientInterface
@@ -37,14 +37,14 @@ final class Psr16DecoratedOpenWeatherMapClient implements OpenWeatherMapClientIn
 
     public function __construct(
         OpenWeatherMapClient $client,
-        AdapterInterface $adapter,
+        CacheItemPoolInterface $cache,
         ConfigResolverInterface $configResolver,
         CacheKeyRegistry $keyRegistry
     ) {
         $this->client = $client;
         $this->configResolver = $configResolver;
         $this->ttl = $this->configResolver->getParameter('weather.ttl', 'app');
-        $this->cache = new Psr6Cache($adapter);
+        $this->cache = new Psr6Cache($cache);
         $this->keyRegistry = $keyRegistry;
     }
 
