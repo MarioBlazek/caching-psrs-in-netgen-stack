@@ -52,17 +52,13 @@ final class Psr16DecoratedOpenWeatherMapClient implements OpenWeatherMapClientIn
     {
         $key = $this->keyRegistry->getCurrentWeatherKey($city);
 
-        if ($this->cache->has($key)) {
-            return $this->cache->get($key);
+        $weather = $this->cache->get($key);
+
+        if (!$weather) {
+            $weather = $this->client->getCurrentWeather($city);
+
+            $this->cache->set($key, $weather, $this->ttl);
         }
-
-        $weather = $this->client->getCurrentWeather($city);
-
-        if (empty($weather)) {
-            return [];
-        }
-
-        $this->cache->set($key, $weather, $this->ttl);
 
         return $weather;
     }
